@@ -1,21 +1,12 @@
-// ═══════════════════════════════════════════════════════════
-// FRONTEND REACT + TYPESCRIPT - Corregido para main.py
-// ═══════════════════════════════════════════════════════════
-
 import { useState } from 'react'
 import { Play, Loader2, CheckCircle, AlertCircle, Database, 
          Brain, FileText, Send } from 'lucide-react'
 import './App.css'
 
-// Tipos (adaptados a la respuesta del backend)
 interface LogEntry {
-  fecha?: string      // backend usa "fecha"
-  nodo?: string       // backend usa "nodo" (ej: "1-recibir datos")
-  mensaje?: string    // backend usa "mensaje"
-  // compatibilidad con otros formatos
-  node?: string
-  message?: string
-  timestamp?: string
+  fecha?: string      
+  nodo?: string       
+  mensaje?: string    
 }
 
 interface Propuesta {
@@ -60,7 +51,6 @@ function App() {
 
       if (data.exito) {
         setPropuesta(data.propuesta)
-        // El backend puede devolver "logs" o "log"
         const logsData = data.logs || data.log || []
         setLogs(logsData)
       } else {
@@ -73,7 +63,6 @@ function App() {
     }
   }
 
-  // Obtener el nombre del nodo (prioriza "nodo" del backend)
   const getNodeName = (log: LogEntry): string => {
     return log.nodo || log.node || ''
   }
@@ -109,7 +98,7 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>🤖 Agente Working Capital</h1>
+        <h1>Agente Working Capital</h1>
         <p>Optimiza términos de pago con IA local (LM Studio)</p>
       </header>
 
@@ -147,7 +136,7 @@ function App() {
 
       {logs.length > 0 && (
         <div className="log-section">
-          <h2>📋 Log de Ejecución</h2>
+          <h2> Log de Ejecución</h2>
           <div className="log-container">
             {logs.map((log, index) => (
               <div 
@@ -173,7 +162,7 @@ function App() {
 
       {propuesta && (
         <div className="result-section">
-          <h2>✅ Propuesta Generada</h2>
+          <h2>Propuesta Generada</h2>
           <div className="proposal-card">
             <div className="proposal-row">
               <span>DPO Actual:</span>
